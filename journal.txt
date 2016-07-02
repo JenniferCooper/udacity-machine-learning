@@ -3,4 +3,32 @@ Need to get a handle on the dataset.
 
 I did create a simple NB classifier using only 'salary' and 'poi' features. The accuracy was 0.344827586207 :) only up from that!
 
-I need a list of the features and maybe a distribution of values. 
+I need a list of the features and maybe a distribution of values. Right, found
+explore_enron_data.py. 
+The set of possible features:
+    salary
+    to_messages
+    deferral_payments
+    total_payments
+    exercised_stock_options
+    bonus
+    restricted_stock
+    shared_receipt_with_poi
+    restricted_stock_deferred
+    total_stock_value
+    expenses
+    loan_advances
+    from_messages
+    other
+    from_this_person_to_poi
+    poi
+    director_fees
+    deferred_income
+    long_term_incentive
+    email_address
+    from_poi_to_this_person
+'NaN' is used as a null value. There are 146 people in the dataset. in general, 
+we have money and email data. It is not clear to me what 
+'shared_receipt_with_poi' means. That a person was on the same email thread?
+ I created a features dict and looked at the raw data. Maybe I'll start with 
+total money, and some email to/froms.

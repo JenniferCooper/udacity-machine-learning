@@ -18,7 +18,9 @@ with open("final_project_dataset.pkl", "r") as data_file:
     data_dict = pickle.load(data_file)
 
 ### Task 2: Remove outliers
+
 ### Task 3: Create new feature(s)
+
 ### Store to my_dataset for easy export below.
 my_dataset = data_dict
 
@@ -51,7 +53,7 @@ features_train, features_test, labels_train, labels_test = \
     
 clf.fit(features_train, labels_train)
 pred = clf.predict(features_test)
-print accuracy_score(labels_test, pred)
+#print accuracy_score(labels_test, pred)
 
 ### Task 6: Dump your classifier, dataset, and features_list so anyone can
 ### check your results. You do not need to change anything below, but make sure
