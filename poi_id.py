@@ -18,6 +18,7 @@ with open("final_project_dataset.pkl", "r") as data_file:
     data_dict = pickle.load(data_file)
 
 ### Task 2: Remove outliers
+data_dict.pop( "TOTAL", 0 )
 
 ### Task 3: Create new feature(s)
 

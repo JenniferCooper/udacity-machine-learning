@@ -32,3 +32,20 @@ we have money and email data. It is not clear to me what
 'shared_receipt_with_poi' means. That a person was on the same email thread?
  I created a features dict and looked at the raw data. Maybe I'll start with 
 total money, and some email to/froms.
+
+I should plot these features to look for outliers; I removed the "Total" from 
+the data dict, and then checked the to/from pois, but didn't see any 
+outliers. Here are the more prolific emailers:
+BECK SALLY W
+386
+LAVORATO JOHN J
+411
+LAVORATO JOHN J
+528
+DELAINEY DAVID W
+609
+KEAN STEVEN J
+387
+DIETRICH JANET R
+305
+
