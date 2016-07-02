@@ -1,0 +1,6 @@
+07/02/16
+Need to get a handle on the dataset. 
+
+I did create a simple NB classifier using only 'salary' and 'poi' features. The accuracy was 0.344827586207 :) only up from that!
+
+I need a list of the features and maybe a distribution of values. 
