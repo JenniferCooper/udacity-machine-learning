@@ -14,18 +14,17 @@ be about 1-2 paragraphs per question. If you find yourself writing much more tha
 take a step back and see if you can simplify your response!
 
 When your evaluator looks at your responses, he or she will use a specific list of rubric items
- to assess your answers. Here is the link to that rubric: Link to the rubric Each question has 
- one or more specific rubric items associated with it, so before you submit an answer, take a 
- look at that part of the rubric. If your response does not meet expectations for all rubric 
- points, you will be asked to revise and resubmit your project. Make sure that your responses 
- are detailed enough that the evaluator will be able to understand the steps you took and your 
- thought processes as you went through the data analysis.
+to assess your answers. Here is the link to that rubric: Link to the rubric Each question has 
+one or more specific rubric items associated with it, so before you submit an answer, take a 
+look at that part of the rubric. If your response does not meet expectations for all rubric 
+points, you will be asked to revise and resubmit your project. Make sure that your responses 
+are detailed enough that the evaluator will be able to understand the steps you took and your 
+thought processes as you went through the data analysis.
 
 Once you’ve submitted your responses, your coach will take a look and may ask a few more focused 
 follow-up questions on one or more of your answers.  
 
 We can’t wait to see what you’ve put together for this project!
-
 
 Summarize for us the goal of this project and how machine learning is useful in trying to accomplish 
 it. As part of your answer, give some background on the dataset and how it can be used to answer the 
@@ -49,8 +48,21 @@ feature scores and reasons for your choice of parameter values.
 [relevant rubric items: “create new features”, “properly scale features”, “intelligently select 
 feature”]
 
+My feature list focused on money and email parameters, assuming the money matters most, 
+and that communications would be next. I picked some set of the features, but the accuracy went down.
+Later, I added many more and then ran PCA on them.
+My entire features_list = ['poi','salary', 'deferral_payments', 'exercised_stock_options', 
+'bonus', 'restricted_stock', 'long_term_incentive', 'shared_receipt_with_poi', 
+'from_this_person_to_poi', 'from_poi_to_this_person']
+I then used PCA(n_components=2) to find the principle components of these features.
+
+
 What algorithm did you end up using? What other one(s) did you try? How did model performance differ 
 between algorithms?  [relevant rubric item: “pick an algorithm”]
+
+GaussianNB had a .95 accuracy
+SVC(C=10000.0, kernel="rbf") had a .9 accuracy
+
 
 What does it mean to tune the parameters of an algorithm, and what can happen if you don’t do this 
 well?  How did you tune the parameters of your particular algorithm? (Some algorithms do not have 

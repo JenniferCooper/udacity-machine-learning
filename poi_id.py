@@ -5,6 +5,9 @@ import pickle
 sys.path.append("../tools/")
 
 from sklearn.metrics import accuracy_score
+from sklearn.metrics import recall_score
+from sklearn.metrics import precision_score
+from sklearn.metrics import f1_score
 from feature_format import featureFormat, targetFeatureSplit
 from tester import dump_classifier_and_data
 
@@ -39,9 +42,11 @@ labels, features = targetFeatureSplit(data)
 
 
 # Provided to give you a starting point. Try a variety of classifiers.
+#from sklearn.svm import SVC
+#clf = SVC(C=10000.0, kernel="rbf")
+
 from sklearn.naive_bayes import GaussianNB
 clf = GaussianNB()
-
 
 ### Task 5: Tune your classifier to achieve better than .3 precision and recall 
 ### using our testing script. Check the tester.py script in the final project
@@ -50,7 +55,6 @@ clf = GaussianNB()
 ### stratified shuffle split cross validation. For more info: 
 ### http://scikit-learn.org/stable/modules/generated/sklearn.cross_validation.StratifiedShuffleSplit.html
 
-# Example starting point. Try investigating other evaluation techniques!
 from sklearn.cross_validation import train_test_split
 features_train, features_test, labels_train, labels_test = \
     train_test_split(features, labels, test_size=0.3, random_state=42)
@@ -62,7 +66,17 @@ pca_features_test = pca.fit_transform(features_test)
     
 clf.fit(pca_features_train, labels_train)
 pred = clf.predict(pca_features_test)
-print accuracy_score(labels_test, pred)
+#print pred
+print
+
+# Example starting point. Try investigating other evaluation techniques!
+print "accuracy", accuracy_score(labels_test, pred)
+precision = precision_score(labels_test, pred)
+print "precision", precision
+recall = recall_score(labels_test, pred)
+print "recall", recall
+f1 = f1_score(labels_test, pred)
+print "F1", f1
 
 ### Task 6: Dump your classifier, dataset, and features_list so anyone can
 ### check your results. You do not need to change anything below, but make sure
