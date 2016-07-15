@@ -1,3 +1,47 @@
+07/15/2016
+A very long break: husband's grandmother dying, the service, getting back to Seattle, 
+getting back to life, getting sick. 
+
+looking at tester.py today and hopefully looking at the changes I need to make
+to get the SVM up and running at a decent p/r. Then, I'll try a decision tree 
+classifier and then put this class to bed!
+
+Ah, apparently I should have read my last journal entry. 
+
+Here are the results from the DT classifer from tester.py:
+DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
+            max_features=None, max_leaf_nodes=None, min_samples_leaf=1,
+            min_samples_split=5, min_weight_fraction_leaf=0.0,
+            presort=False, random_state=0, splitter='best')
+Accuracy: 0.78929       Precision: 0.25839      Recall: 0.25400 F1: 0.25618     F2: 0.25487
+        Total predictions: 14000        True positives:  508    False positives: 1458   
+        False negatives: 1492   True negatives: 10542
+
+it looks like my classifier is doing equally poorly on false negs and false pos.
+is this a problem with my features? What if I remove the PCA? hm, no change.
+
+OK. Changing the min_samples_split upped the stats, but not meaningfully:
+(3)
+Accuracy: 0.79271       Precision: 0.27337      Recall: 0.27200 F1: 0.27268     F2: 0.27227
+(1)
+Accuracy: 0.79200       Precision: 0.28014      Recall: 0.29050 F1: 0.28522     F2: 0.28837
+
+Started looking at my features list. Only looking at $, specifically:
+'salary', 'exercised_stock_options', 'bonus'
+helps the recall:
+(1)
+Accuracy: 0.76646       Precision: 0.28069      Recall: 0.33150 F1: 0.30399     F2: 0.31992
+(3)
+Accuracy: 0.78492       Precision: 0.30736      Recall: 0.31750 F1: 0.31235     F2: 0.31542
+
+OK. Time to go to work
+
+
+07/08/2016
+Still trying to figure out my SVM problems. I have changed the kernel params, to no
+effect. 
+I switched to experimenting with decision trees.
+
 07/06/2016
 Experimenting with types of ML algos. I have been using the GaussianNB originally provided.
 I'd like to try an SVM and a Kmeans. Decision tree doesn't seem too interesting here. 
@@ -5,6 +49,16 @@ I'd like to try an SVM and a Kmeans. Decision tree doesn't seem too interesting 
 I also tried to add precision and recall measurements to look at the differences between
 these evaluations and the accuracy score when the algos change. I got an error
 "UndefinedMetricWarning: Precision is ill-defined and being set to 0.0"
+
+The GaussianNB had the following scores
+accuracy 0.95
+precision 1.0
+recall 0.5
+F1 0.666666666667
+
+The SVM didn't make any predications. Hm. I can't find out what is up. It makes no predications.
+
+Kmeans didn't work out for me. it predicted all the persons were POIs!! 
 
 
 07/03/2016

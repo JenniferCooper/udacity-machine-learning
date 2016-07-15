@@ -14,7 +14,8 @@ from tester import dump_classifier_and_data
 ### Task 1: Select what features you'll use.
 ### features_list is a list of strings, each of which is a feature name.
 ### The first feature must be "poi".
-features_list = ['poi','salary', 'deferral_payments', 'exercised_stock_options', 'bonus', 'restricted_stock', 'long_term_incentive', 'shared_receipt_with_poi', 'from_this_person_to_poi', 'from_poi_to_this_person']
+#features_list = ['poi','salary', 'deferral_payments', 'exercised_stock_options', 'bonus', 'restricted_stock', 'long_term_incentive', 'shared_receipt_with_poi', 'from_this_person_to_poi', 'from_poi_to_this_person']
+features_list = ['poi', 'salary', 'exercised_stock_options', 'bonus']
 # You will need to use more features
 
 ### Load the dictionary containing the dataset
@@ -23,7 +24,6 @@ with open("final_project_dataset.pkl", "r") as data_file:
 
 ### Task 2: Remove outliers
 data_dict.pop( "TOTAL", 0 )
-
 ### Task 3: Create new feature(s)
 
 
@@ -41,13 +41,6 @@ labels, features = targetFeatureSplit(data)
 ### http://scikit-learn.org/stable/modules/pipeline.html
 
 
-# Provided to give you a starting point. Try a variety of classifiers.
-#from sklearn.svm import SVC
-#clf = SVC(C=10000.0, kernel="rbf")
-
-from sklearn.naive_bayes import GaussianNB
-clf = GaussianNB()
-
 ### Task 5: Tune your classifier to achieve better than .3 precision and recall 
 ### using our testing script. Check the tester.py script in the final project
 ### folder for details on the evaluation method, especially the test_classifier
@@ -59,15 +52,25 @@ from sklearn.cross_validation import train_test_split
 features_train, features_test, labels_train, labels_test = \
     train_test_split(features, labels, test_size=0.3, random_state=42)
     
-from sklearn.decomposition import PCA
-pca = PCA(n_components=2)
-pca_features_train = pca.fit_transform(features_train)
-pca_features_test = pca.fit_transform(features_test)
-    
-clf.fit(pca_features_train, labels_train)
-pred = clf.predict(pca_features_test)
-#print pred
-print
+#from sklearn.decomposition import PCA
+#pca = PCA(n_components=2)
+#pca_features_train = pca.fit_transform(features_train)
+#pca_features_test = pca.fit_transform(features_test)
+
+# plotting: what am I plotting here again?
+#import matplotlib.pyplot as plt
+#for f1, f2 in pca_features_train:
+#    plt.scatter( f1, f2 )
+#plt.show()
+
+from sklearn import tree
+clf = tree.DecisionTreeClassifier(min_samples_split=3, random_state=0)
+#from sklearn.svm import SVC
+#clf = SVC(C=.5, kernel="rbf")
+clf.fit(features_train, labels_train)
+pred = clf.predict(features_test)
+print pred
+print labels_test
 
 # Example starting point. Try investigating other evaluation techniques!
 print "accuracy", accuracy_score(labels_test, pred)
@@ -83,4 +86,4 @@ print "F1", f1
 ### that the version of poi_id.py that you submit can be run on its own and
 ### generates the necessary .pkl files for validating your results.
 
-#dump_classifier_and_data(clf, my_dataset, features_list)
+dump_classifier_and_data(clf, my_dataset, features_list)
