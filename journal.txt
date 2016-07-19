@@ -1,5 +1,46 @@
+07/17/2016
+I'm sticking with min_split=3, and adding in the feature for restricted stock helps
+accuracy but not p/r:
+Accuracy: 0.79707       Precision: 0.29538      Recall: 0.30350 F1: 0.29938     F2: 0.30184
+'deferral_payments' instead:
+Accuracy: 0.78469       Precision: 0.30272      Recall: 0.30650 F1: 0.30460     F2: 0.30574
+wow, really crappy with 'long_term_incentive'
+Accuracy: 0.77092       Precision: 0.26670      Recall: 0.27950 F1: 0.27295     F2: 0.27684
+
+Ok, what about just email data?
+Even crappier:
+Accuracy: 0.78333       Precision: 0.13178      Recall: 0.17000 F1: 0.14847     F2: 0.16068
+
+If I combined I have:
+Accuracy: 0.79262       Precision: 0.30383      Recall: 0.26950 F1: 0.28564     F2: 0.27573
+
+I went back to only basic $ features: 'salary', 'exercised_stock_options', 'bonus'
+to experiment more with the DT parameters.
+
+with basic $ and only 'shared_receipt_with_poi' and DT with criterion='entropy',
+min_samples_split=3, random_state=42,
+ Accuracy: 0.79792       Precision: 0.31763      Recall: 0.27300 F1: 0.29363     F2: 0.28089
+
+which is pretty close to the mins needed ("to achieve better than .3 precision and recall")
+random_state 
+(0)
+Accuracy: 0.79531       Precision: 0.30796      Recall: 0.26500 F1: 0.28487     F2: 0.27261
+(15)
+Accuracy: 0.79738       Precision: 0.31505      Recall: 0.27000 F1: 0.29079     F2: 0.27795
+(30)
+Accuracy: 0.79369       Precision: 0.30581      Recall: 0.26850 F1: 0.28594     F2: 0.27522
+(50)
+Accuracy: 0.79923       Precision: 0.32205      Recall: 0.27600 F1: 0.29725     F2: 0.28413
+
+on the forums, some folks created ratios of to_poi/from_poi for use in their features.
+It's not clear to me how to do this in the code.
+
+I read Raschka's excellent Introduction to NB and Text Classification. I need another 
+for DTs. 
+
+
 07/15/2016
-A very long break: husband's grandmother dying, the service, getting back to Seattle, 
+A very long break: husb's grandmother dying, the service, getting back to Seattle, 
 getting back to life, getting sick. 
 
 looking at tester.py today and hopefully looking at the changes I need to make

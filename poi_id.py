@@ -14,13 +14,30 @@ from tester import dump_classifier_and_data
 ### Task 1: Select what features you'll use.
 ### features_list is a list of strings, each of which is a feature name.
 ### The first feature must be "poi".
-#features_list = ['poi','salary', 'deferral_payments', 'exercised_stock_options', 'bonus', 'restricted_stock', 'long_term_incentive', 'shared_receipt_with_poi', 'from_this_person_to_poi', 'from_poi_to_this_person']
-features_list = ['poi', 'salary', 'exercised_stock_options', 'bonus']
+#$ only: 'salary', 'exercised_stock_options', 'bonus'
+#features_list = ['poi','salary', 'deferral_payments', 'exercised_stock_options', 'bonus', 'restricted_stock', 'long_term_incentive', 
+#'shared_receipt_with_poi', 'from_this_person_to_poi', 'from_poi_to_this_person']
+#ratios for to/from emails
+
+features_list = ['poi', 'salary', 'exercised_stock_options', 'bonus', 'shared_receipt_with_poi']
 # You will need to use more features
 
 ### Load the dictionary containing the dataset
 with open("final_project_dataset.pkl", "r") as data_file:
     data_dict = pickle.load(data_file)
+
+extended_dict = data_dict.copy()    
+#create a new feature that is the ratio of 'from_this_person_to_poi' to from_messages
+for person in data_dict:
+    for feature in data_dict[person]:
+        ratio = float(data_dict[person]['from_this_person_to_poi']) / float(data_dict[person]['from_messages'])
+        extended_dict[person]['to_poi_ratio'] = ratio
+
+print extended_dict[]
+#for person in extended_dict:
+#    for feature in extended_dict[person]:
+#        print "{0} : {1}", feature, extended_dict[person][feature]
+      
 
 ### Task 2: Remove outliers
 data_dict.pop( "TOTAL", 0 )
@@ -64,13 +81,11 @@ features_train, features_test, labels_train, labels_test = \
 #plt.show()
 
 from sklearn import tree
-clf = tree.DecisionTreeClassifier(min_samples_split=3, random_state=0)
+clf = tree.DecisionTreeClassifier(min_samples_split=3, random_state=50, criterion="entropy")
 #from sklearn.svm import SVC
 #clf = SVC(C=.5, kernel="rbf")
 clf.fit(features_train, labels_train)
 pred = clf.predict(features_test)
-print pred
-print labels_test
 
 # Example starting point. Try investigating other evaluation techniques!
 print "accuracy", accuracy_score(labels_test, pred)
