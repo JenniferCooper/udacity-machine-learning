@@ -9,4 +9,8 @@ aS'bonus'
 p4
 aS'shared_receipt_with_poi'
 p5
+aS'to_poi_ratio'
+p6
+aS'from_poi_ratio'
+p7
 a.

@@ -1,3 +1,15 @@
+07/20/2016
+DISCO!
+The new ratios really popped up my p/r:
+Accuracy: 0.83500       Precision: 0.45455      Recall: 0.36250 F1: 0.40334     F2: 0.37780
+I am putting DT to bed, and will hit some SVM work tomorrow. Then, it is time to move on! 
+I am thinking of a completely new project for myself.
+
+
+07/19/2016
+Adding the email ratio features to see if that helps my classifier
+
+
 07/17/2016
 I'm sticking with min_split=3, and adding in the feature for restricted stock helps
 accuracy but not p/r:
@@ -33,7 +45,6 @@ Accuracy: 0.79369       Precision: 0.30581      Recall: 0.26850 F1: 0.28594     
 Accuracy: 0.79923       Precision: 0.32205      Recall: 0.27600 F1: 0.29725     F2: 0.28413
 
 on the forums, some folks created ratios of to_poi/from_poi for use in their features.
-It's not clear to me how to do this in the code.
 
 I read Raschka's excellent Introduction to NB and Text Classification. I need another 
 for DTs. 

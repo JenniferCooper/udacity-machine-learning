@@ -10,6 +10,7 @@ from sklearn.metrics import precision_score
 from sklearn.metrics import f1_score
 from feature_format import featureFormat, targetFeatureSplit
 from tester import dump_classifier_and_data
+from copy import deepcopy
 
 ### Task 1: Select what features you'll use.
 ### features_list is a list of strings, each of which is a feature name.
@@ -18,31 +19,35 @@ from tester import dump_classifier_and_data
 #features_list = ['poi','salary', 'deferral_payments', 'exercised_stock_options', 'bonus', 'restricted_stock', 'long_term_incentive', 
 #'shared_receipt_with_poi', 'from_this_person_to_poi', 'from_poi_to_this_person']
 #ratios for to/from emails
+#, 'to_poi_ratio', 'from_poi_ratio'
 
-features_list = ['poi', 'salary', 'exercised_stock_options', 'bonus', 'shared_receipt_with_poi']
+features_list = ['poi', 'salary', 'exercised_stock_options', 'bonus', 'shared_receipt_with_poi', 'to_poi_ratio', 'from_poi_ratio']
 # You will need to use more features
 
 ### Load the dictionary containing the dataset
 with open("final_project_dataset.pkl", "r") as data_file:
     data_dict = pickle.load(data_file)
 
-extended_dict = data_dict.copy()    
-#create a new feature that is the ratio of 'from_this_person_to_poi' to from_messages
-for person in data_dict:
-    for feature in data_dict[person]:
-        ratio = float(data_dict[person]['from_this_person_to_poi']) / float(data_dict[person]['from_messages'])
-        extended_dict[person]['to_poi_ratio'] = ratio
-
-print extended_dict[]
-#for person in extended_dict:
-#    for feature in extended_dict[person]:
-#        print "{0} : {1}", feature, extended_dict[person][feature]
-      
-
 ### Task 2: Remove outliers
 data_dict.pop( "TOTAL", 0 )
-### Task 3: Create new feature(s)
 
+### Task 3: Create new feature(s)
+temp = deepcopy(data_dict)
+
+for person in temp:
+    for feature in temp[person]:
+        if (isinstance(temp[person]['from_this_person_to_poi'], int) and (isinstance(temp[person]['from_messages'], int))):
+            to_ratio = float(temp[person]['from_this_person_to_poi']) / float(temp[person]['from_messages'])
+            data_dict[person]['to_poi_ratio'] = to_ratio
+        else:
+            data_dict[person]['to_poi_ratio'] = 'NaN'
+        if (isinstance(temp[person]['from_poi_to_this_person'], int) and (isinstance(temp[person]['to_messages'], int))):
+            from_ratio = float(temp[person]['from_poi_to_this_person']) / float(temp[person]['to_messages'])
+            data_dict[person]['from_poi_ratio'] = from_ratio
+        else:
+            data_dict[person]['from_poi_ratio'] = 'NaN'
+
+print data_dict['DELAINEY DAVID W']
 
 ### Store to my_dataset for easy export below.
 my_dataset = data_dict
