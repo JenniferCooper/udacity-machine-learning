@@ -1,3 +1,18 @@
+07/22/2016
+
+
+
+07/21/2016
+I just wanted to look at one more thing: PCA with the DT. Then I will switch to 
+SVMs. I am trying to not get too lost in this project :)
+hmmmmmm, 
+Accuracy: 0.83500       Precision: 0.45455      Recall: 0.36250 F1: 0.40334     F2: 0.37780
+I find it rather odd there is no impact at all... 
+I rechecked everything, and the code looks right AFAICT.
+
+OK,  I need to move on. Maybe I'll use SVMs as an opportunity to look deeper.
+
+
 07/20/2016
 DISCO!
 The new ratios really popped up my p/r:

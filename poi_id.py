@@ -47,7 +47,7 @@ for person in temp:
         else:
             data_dict[person]['from_poi_ratio'] = 'NaN'
 
-print data_dict['DELAINEY DAVID W']
+#print data_dict['DELAINEY DAVID W']
 
 ### Store to my_dataset for easy export below.
 my_dataset = data_dict
@@ -79,16 +79,8 @@ features_train, features_test, labels_train, labels_test = \
 #pca_features_train = pca.fit_transform(features_train)
 #pca_features_test = pca.fit_transform(features_test)
 
-# plotting: what am I plotting here again?
-#import matplotlib.pyplot as plt
-#for f1, f2 in pca_features_train:
-#    plt.scatter( f1, f2 )
-#plt.show()
-
-from sklearn import tree
-clf = tree.DecisionTreeClassifier(min_samples_split=3, random_state=50, criterion="entropy")
-#from sklearn.svm import SVC
-#clf = SVC(C=.5, kernel="rbf")
+from sklearn.svm import SVC
+clf = SVC(C=10000.0, kernel="rbf")
 clf.fit(features_train, labels_train)
 pred = clf.predict(features_test)
 

@@ -55,13 +55,17 @@ My entire features_list = ['poi','salary', 'deferral_payments', 'exercised_stock
 'bonus', 'restricted_stock', 'long_term_incentive', 'shared_receipt_with_poi', 
 'from_this_person_to_poi', 'from_poi_to_this_person']
 I then used PCA(n_components=2) to find the principle components of these features.
+Later, I added ratios for email sent to POIs and from POIs this vaulted my p/r scores
+up quite a bit.
 
 
 What algorithm did you end up using? What other one(s) did you try? How did model performance differ 
 between algorithms?  [relevant rubric item: “pick an algorithm”]
 
 GaussianNB had a .95 accuracy
-SVC(C=10000.0, kernel="rbf") had a .9 accuracy
+SVC(C=10000.0, kernel="rbf") had a .9 accuracy, but no P/R. When I returned, I could not get 
+this classifier to not return a divide by 0 error.
+I got good results with a Decision Tree using PCA and the new ratio features.
 
 
 What does it mean to tune the parameters of an algorithm, and what can happen if you don’t do this 
@@ -71,11 +75,22 @@ explain how you would have done it for the model that was not your final choice 
 that does utilize parameter tuning, e.g. a decision tree classifier).  [relevant rubric item: 
     “tune the algorithm”]
 
+You can overrfit or not get as good results from the algorithm. For my Decision Tree, I tuned 
+the min_split and the random_state parameters. 
+
+
 What is validation, and what’s a classic mistake you can make if you do it wrong? How did you 
 validate your analysis?  [relevant rubric item: “validation strategy”]
+
+Validation is the testing and statistical analysis done to make sure the algorithm is working well.
+The classic mistake is to overfit your classifier. This means your number look great, but
+the classifier will not work well on new data. 
+
 
 Give at least 2 evaluation metrics and your average performance for each of them.  Explain an 
 interpretation of your metrics that says something human-understandable about your algorithm’s 
 performance. [relevant rubric item: “usage of evaluation metrics”]
 
+Accuracy: 0.83500       Precision: 0.45455      Recall: 0.36250 F1: 0.40334     F2: 0.37780
+Are the eval metrics for my Decision Tree classifier. 
 
